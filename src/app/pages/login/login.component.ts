@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LoginService } from 'src/app/services/login-service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,10 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService,
+    private toastrService: ToastrService
+
   ) {
     this._form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -25,11 +30,13 @@ export class LoginComponent {
   }
 
   submit(): void {
-    if (this.form.valid) {
-      console.log(this.form.value);
-    } else {
-      console.error('Formulário inválido!');
+    if (!this.form.valid) {
     }
+
+    this.loginService.login(this._form.value.email, this._form.value.password).subscribe({
+      next: () => this.toastrService.success("Login efetuado com sucesso!"),
+      error: () => this.toastrService.error("Ocorreu uma falha ao realizar o login.")
+    })
   }
 
   navigate(): void {

@@ -4,6 +4,7 @@
     secondaryBtnText="Sign Up Now"
     (submit)="submit()"
     (navigate)="navigate()"
+    [disablePrimaryBtn]="!form.valid"
 >
     <form [formGroup]="form">
         <app-primary-input
