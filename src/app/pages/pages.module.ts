@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { ComponentsModule } from '../components/components.module';
 import { RoutingModule } from './routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { RoutingModule } from './routing.module';
   imports: [
     CommonModule,
     RoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }
