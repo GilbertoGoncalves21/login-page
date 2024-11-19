@@ -5,12 +5,12 @@ import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/services/login-service/login.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
-export class LoginComponent {
-  private _form: FormGroup<LoginForm>;
+export class SignUpComponent {
+  private _form: FormGroup<SignUpForm>;
 
   constructor(
     private fb: FormBuilder,
@@ -20,8 +20,10 @@ export class LoginComponent {
 
   ) {
     this._form = this.fb.group({
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      passwordConfirm: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
 
@@ -40,11 +42,13 @@ export class LoginComponent {
   }
 
   navigate(): void {
-    this.router.navigate(["/sign-up"])
+    this.router.navigate(["/login"])
   }
 }
 
-interface LoginForm {
+interface SignUpForm {
+  name: FormControl,
   email: FormControl,
   password: FormControl,
+  passwordConfirm: FormControl,
 }
